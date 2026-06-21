@@ -1,0 +1,193 @@
+{
+  "info": {
+    "_postman_id": "40af1140-29a1-4505-bd7c-87a80ea67de3",
+    "name": "NASA Demo",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "28052532",
+    "_collection_link": "https://go.postman.co/collection/28052532-40af1140-29a1-4505-bd7c-87a80ea67de3?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "pic_of_theYear",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Visualization Script",
+              "// Visualization Script",
+              "",
+              "const template = `",
+              "<style>",
+              "  body { font-family: Arial, sans-serif; margin: 20px; }",
+              "  h2 { color: #1a1a2e; }",
+              "  table { border-collapse: collapse; width: 100%; table-layout: fixed; }",
+              "  th {",
+              "    background-color: #0b3d91;",
+              "    color: white;",
+              "    padding: 10px 14px;",
+              "    text-align: left;",
+              "    font-size: 14px;",
+              "  }",
+              "  td {",
+              "    padding: 10px 14px;",
+              "    border: 1px solid #ddd;",
+              "    vertical-align: top;",
+              "    word-wrap: break-word;",
+              "    overflow-wrap: break-word;",
+              "    font-size: 13px;",
+              "    line-height: 1.5;",
+              "  }",
+              "  tr:nth-child(even) td { background-color: #f2f6ff; }",
+              "  tr:nth-child(odd) td { background-color: #ffffff; }",
+              "  tr:hover td { background-color: #dce8ff; }",
+              "  .field-col { width: 160px; font-weight: bold; color: #0b3d91; }",
+              "  a { color: #0b3d91; word-break: break-all; }",
+              "</style>",
+              "<h2>🚀 NASA Astronomy Picture of the Day</h2>",
+              "<table>",
+              "  <thead>",
+              "    <tr>",
+              "      <th class=\"field-col\">Field</th>",
+              "      <th>Value</th>",
+              "    </tr>",
+              "  </thead>",
+              "  <tbody>",
+              "    {{#each rows}}",
+              "    <tr>",
+              "      <td class=\"field-col\">{{field}}</td>",
+              "      <td>{{#if isLink}}<a href=\"{{value}}\" target=\"_blank\">{{value}}</a>{{else}}{{value}}{{/if}}</td>",
+              "    </tr>",
+              "    {{/each}}",
+              "  </tbody>",
+              "</table>",
+              "`;",
+              "",
+              "function createPayload() {",
+              "  const data = pm.response.json();",
+              "  const urlFields = ['hdurl', 'url'];",
+              "  const rows = Object.entries(data).map(([key, val]) => ({",
+              "    field: key,",
+              "    value: val !== null && val !== undefined ? String(val) : '',",
+              "    isLink: urlFields.includes(key) && typeof val === 'string' && val.startsWith('http')",
+              "  }));",
+              "  return { rows };",
+              "}",
+              "",
+              "pm.visualizer.set(template, createPayload());",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "accept",
+            "value": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
+          },
+          {
+            "key": "accept-language",
+            "value": "en-NG,en-US;q=0.9,en;q=0.8,uk-UA;q=0.7,uk;q=0.6,es-US;q=0.5,es;q=0.4,en-GB;q=0.3"
+          },
+          {
+            "key": "priority",
+            "value": "u=0, i"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Google Chrome\";v=\"149\", \"Chromium\";v=\"149\", \"Not)A;Brand\";v=\"24\""
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?1"
+          },
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"Android\""
+          },
+          {
+            "key": "sec-fetch-dest",
+            "value": "document"
+          },
+          {
+            "key": "sec-fetch-mode",
+            "value": "navigate"
+          },
+          {
+            "key": "sec-fetch-site",
+            "value": "none"
+          },
+          {
+            "key": "sec-fetch-user",
+            "value": "?1"
+          },
+          {
+            "key": "sec-gpc",
+            "value": "1"
+          },
+          {
+            "key": "upgrade-insecure-requests",
+            "value": "1"
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (Linux; Android 15; Pixel 9) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Mobile Safari/537.36"
+          }
+        ],
+        "url": {
+          "raw": "{{BASE_URL}}/planetary/apod?api_key={{API_KEY}}",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "planetary",
+            "apod"
+          ],
+          "query": [
+            {
+              "key": "api_key",
+              "value": "{{API_KEY}}"
+            }
+          ]
+        },
+        "description": "Generated from cURL: curl 'https://api.nasa.gov/planetary/apod?api_key=0LLGhKWMulbzH89qglVMcazoWTgsTZv1qRPAb4Bg' \\\n  -H 'accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7' \\\n  -H 'accept-language: en-NG,en-US;q=0.9,en;q=0.8,uk-UA;q=0.7,uk;q=0.6,es-US;q=0.5,es;q=0.4,en-GB;q=0.3' \\\n  -H 'priority: u=0, i' \\\n  -H 'sec-ch-ua: \"Google Chrome\";v=\"149\", \"Chromium\";v=\"149\", \"Not)A;Brand\";v=\"24\"' \\\n  -H 'sec-ch-ua-mobile: ?1' \\\n  -H 'sec-ch-ua-platform: \"Android\"' \\\n  -H 'sec-fetch-dest: document' \\\n  -H 'sec-fetch-mode: navigate' \\\n  -H 'sec-fetch-site: none' \\\n  -H 'sec-fetch-user: ?1' \\\n  -H 'sec-gpc: 1' \\\n  -H 'upgrade-insecure-requests: 1' \\\n  -H 'user-agent: Mozilla/5.0 (Linux; Android 15; Pixel 9) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Mobile Safari/537.36'"
+      },
+      "response": []
+    },
+    {
+      "name": "https://api.nasa.gov/planetary/apod?api_key=YOUR_KEY",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{BASE_URL}}/planetary/apod?api_key={{API_KEY}}",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "planetary",
+            "apod"
+          ],
+          "query": [
+            {
+              "key": "api_key",
+              "value": "{{API_KEY}}"
+            }
+          ]
+        },
+        "description": "Generated from cURL: curl \"https://api.nasa.gov/planetary/apod?api_key=YOUR_KEY\" \\\n-H \"Accept: application/json\""
+      },
+      "response": []
+    }
+  ]
+}
