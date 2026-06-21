@@ -1,13 +1,3 @@
-let jsonData;
-
-try {
-    jsonData = pm.response.json();
-} catch (e) {
-    pm.test("Response is valid JSON", function () {
-        pm.expect.fail("Response is not JSON");
-    });
-}
-
 {
   "info": {
     "_postman_id": "40af1140-29a1-4505-bd7c-87a80ea67de3",
