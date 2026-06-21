@@ -26,7 +26,6 @@ jobs:
         run: |
           mkdir -p reports
           newman run tests/collection.json \
-            -e tests/environment.json \
             -r cli,htmlextra \
             --reporter-htmlextra-export reports/postman-report.html
 
