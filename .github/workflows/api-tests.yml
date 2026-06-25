@@ -26,6 +26,8 @@ jobs:
         run: |
           mkdir -p reports
           newman run tests/collection.json \
+            --env-var BASE_URL=${{ secrets.NASA_BASE_URL }} \
+            --env-var API_KEY=${{ secrets.NASA_API_KEY }} \
             -r cli,htmlextra \
             --reporter-htmlextra-export reports/postman-report.html
 
